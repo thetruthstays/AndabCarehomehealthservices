@@ -37,7 +37,6 @@ andab-care/
 2. Double-click `andab-care.code-workspace` to open the project
 3. Install the **Live Server** extension (recommended in workspace)
 4. Right-click `index.html` → **"Open with Live Server"**
-5. Site opens at `http://127.0.0.1:5500`
 
 ### Option 2 — Direct browser
 - Double-click `index.html` to open directly in your browser
@@ -75,12 +74,3 @@ andab-care/
 
 ---
 
-## 📞 Contact Info
-
-- **Phone:** (740) 909-2424
-- **Email:** info@andabcare.com
-- **Location:** Westerville, OH 43082
-
----
-
-*Built for Andab Care Medical Center · 2026*

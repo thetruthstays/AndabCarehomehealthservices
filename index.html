@@ -121,7 +121,31 @@
           Contact
         </div>
       </div>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
     </nav>
+
+    <!-- MOBILE NAVIGATION -->
+    <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+      <div class="mobile-nav-link active" id="mnav-home" onclick="showPage('home'); closeMobileMenu()">Home</div>
+      <div class="mobile-nav-link" id="mnav-about" onclick="showPage('about'); closeMobileMenu()">About</div>
+      <div class="mobile-nav-group">
+        <div class="mobile-nav-link" id="mnav-services" onclick="showPage('services'); closeMobileMenu()">Services</div>
+        <div class="mobile-nav-sub">
+          <div class="mobile-nav-sublink" onclick="showPage('services'); setTimeout(() => scrollToService('svc-nursing'), 100); closeMobileMenu()">Skilled Nursing Care</div>
+          <div class="mobile-nav-sublink" onclick="showPage('services'); setTimeout(() => scrollToService('svc-physical'), 100); closeMobileMenu()">Physical Therapy</div>
+          <div class="mobile-nav-sublink" onclick="showPage('services'); setTimeout(() => scrollToService('svc-occupational'), 100); closeMobileMenu()">Occupational Therapy</div>
+          <div class="mobile-nav-sublink" onclick="showPage('services'); setTimeout(() => scrollToService('svc-personal'), 100); closeMobileMenu()">Personal Care</div>
+          <div class="mobile-nav-sublink" onclick="showPage('services'); setTimeout(() => scrollToService('svc-homemaking'), 100); closeMobileMenu()">Home Making Services</div>
+        </div>
+      </div>
+      <div class="mobile-nav-link" id="mnav-testimonials" onclick="showPage('testimonials'); closeMobileMenu()">Testimonials</div>
+      <div class="mobile-nav-link" id="mnav-gallery" onclick="showPage('gallery'); closeMobileMenu()">Gallery</div>
+      <div class="mobile-nav-link" id="mnav-contact" onclick="showPage('contact'); closeMobileMenu()">Contact</div>
+    </div>
 
     <!-- PAGE CONTAINERS (filled by JS) -->
     <div id="page-home" class="page active"></div>

@@ -65,8 +65,30 @@ function prevT(id) {
   renderTestimonial(id);
 }
 
+/* ── Mobile Navigation ── */
+function toggleMobileMenu() {
+  const nav = document.getElementById("mobile-nav");
+  const btn = document.getElementById("hamburger-btn");
+  const isOpen = nav.classList.toggle("open");
+  btn.classList.toggle("open", isOpen);
+  btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  nav.setAttribute("aria-hidden", isOpen ? "false" : "true");
+}
+
+function closeMobileMenu() {
+  const nav = document.getElementById("mobile-nav");
+  const btn = document.getElementById("hamburger-btn");
+  nav.classList.remove("open");
+  btn.classList.remove("open");
+  btn.setAttribute("aria-expanded", "false");
+  nav.setAttribute("aria-hidden", "true");
+}
+
 /* ── Page Navigation ── */
 function showPage(name) {
+  /* Close mobile menu */
+  closeMobileMenu();
+
   /* Hide all pages */
   document.querySelectorAll(".page").forEach(function (p) {
     p.classList.remove("active");
@@ -88,6 +110,13 @@ function showPage(name) {
         });
         const navEl = document.getElementById("nav-" + name);
         if (navEl) navEl.classList.add("active");
+
+        /* Update mobile nav active state */
+        document.querySelectorAll(".mobile-nav-link").forEach(function (l) {
+          l.classList.remove("active");
+        });
+        const mNavEl = document.getElementById("mnav-" + name);
+        if (mNavEl) mNavEl.classList.add("active");
 
         /* Scroll to top */
         window.scrollTo(0, 0);

@@ -1041,21 +1041,30 @@ footer {
 .social-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-top: 16px;
 }
 .social-pill {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-  padding: 5px 11px;
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
   color: #b0cccc;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.social-pill svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 .social-pill:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #35c7c2;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: translateY(-3px);
 }
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.07);

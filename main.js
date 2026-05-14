@@ -42,7 +42,10 @@ function renderTestimonial(id) {
   textEl.textContent = "\u201C" + t.text + "\u201D";
   authorEl.textContent = "\u2014 " + t.author;
 
-  dotsEl.innerHTML = "";
+  while (dotsEl.firstChild) {
+    dotsEl.removeChild(dotsEl.firstChild);
+  }
+
   testimonials.forEach(function (_, j) {
     const dot = document.createElement("button");
     dot.className = "t-dot" + (j === i ? " active" : "");
@@ -115,6 +118,17 @@ function showPage(name) {
 
   const currentPage = document.querySelector(".page.active");
 
+  function sanitizeLoadedPage(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    doc.querySelectorAll("script").forEach(function (script) {
+      script.remove();
+    });
+    return doc.body
+      ? Array.from(doc.body.childNodes)
+      : Array.from(doc.childNodes);
+  }
+
   function doSwap() {
     /* Clear all pages */
     document.querySelectorAll(".page").forEach(function (p) {
@@ -124,10 +138,16 @@ function showPage(name) {
 
     fetch(PAGES[name])
       .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Failed to load page");
+        }
         return response.text();
       })
       .then(function (html) {
-        pageEl.innerHTML = html;
+        pageEl.innerHTML = "";
+        sanitizeLoadedPage(html).forEach(function (node) {
+          pageEl.appendChild(document.importNode(node, true));
+        });
         pageEl.classList.add("active");
 
         /* Update desktop nav active state */
@@ -179,14 +199,28 @@ function scrollToService(id) {
 }
 
 /* ── Contact Form ── */
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 function submitForm() {
   const name = document.getElementById("f-name");
   const email = document.getElementById("f-email");
   if (!name || !email) return;
-  if (!name.value.trim() || !email.value.trim()) {
+
+  const trimmedName = name.value.trim();
+  const trimmedEmail = email.value.trim();
+
+  if (!trimmedName || !trimmedEmail) {
     alert("Please enter your name and email address.");
     return;
   }
+
+  if (!isValidEmail(trimmedEmail)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
   document.getElementById("contact-form").style.display = "none";
   document.getElementById("success-box").classList.add("show");
 }
